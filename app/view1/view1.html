@@ -1,19 +1,81 @@
-<p>This is the partial for view 1.</p>
-<h1>hola</h1>
-<div ng-repeat="productos in vm.productos">
-    <p>{{productos.nombre}}</p>
-    <span>
-        {{productos.categoria}}
-    </span>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--hace llamado a la hoja de estilos-->
+    <link rel="stylesheet" type="text/css" href="view1/estilo.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="contenedor-formulario">
+        <div class="wrap">
+            <form action="" class="formulario" name="formulario_registro" method="post">
+                <div>
+                    <!--Descripcion-->
+                    <md-input-container class="md-block">
+                        <label>Descripción</label>
+                        <input md-maxlength="30" required md-no-asterisk name="description" ng-model="project.description">
+                        <div ng-messages="projectForm.description.$error">
+                            <div ng-message="required">Este campo es obligatorio</div>
+                            <div ng-message="md-maxlength">La descripción debe tener menos de 30 caracteres de largo</div>
+                        </div>
+                    </md-input-container> 
 
+                    <!--Seleccionar, desplegar-->
+                    <md-input-container>
+                        <label>Seleccionar</label>
+                        <md-select style="width: 420px;" name="type" ng-model="project.type" required>
+                            <md-option value="app">Application</md-option>
+                            <md-option value="web">Website</md-option>
+                        </md-select>
+                    </md-input-container> 
+                        
+                    <!--Correo-->
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input required type="email" name="clientEmail" ng-model="project.clientEmail"
+                                       minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                        <div ng-messages="projectForm.clientEmail.$error" role="alert">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Su correo electrónico debe tener entre 10 y 100 caracteres y parecer una dirección de correo electrónico
+                            </div>
+                        </div>
+                    </md-input-container>
 
+                    <!--Traer Datos DB-->
+                    <md-input-container class="md-block" flex-gt-sm>
+                                <label>Listar Producto</label>
+                                <md-select ng-model="user.state">
+                                  <md-option ng-repeat="productos in vm.productos" value="{{state.abbrev}}">
+                                        {{productos.nombre}}
+                                  </md-option>
+                                </md-select>
+                    </md-input-container>
 
-<md-content ng-controller="View1Ctrl" layout-padding ng-cloak>
-    <div layout-gt-xs="row">
-      <div flex-gt-xs>
-        <h4>Standard date-picker</h4>
-        <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
-      </div>
-    </div>
-</md-content>
+                    <!--Fecha-->
+                    <div flex-gt-xs>
+                        <md-datepicker ng-model="ctrl.myDate" md-placeholder="Fecha"></md-datepicker>
+                    </div>
+
+                    <!--Contraseña-->
+                    <md-input-container class="md-block">
+                            <label>Contraseña</label>
+                            <input md-maxlength="30" required md-no-asterisk name="description" ng-model="project.description">
+                            <div ng-messages="projectForm.description.$error"></div>
+                                <div ng-message="required">Este campo es obligatorio</div>
+                                <div ng-message="md-maxlength">La descripción debe tener menos de 30 caracteres de largo</div>
+                            </div>
+                    </md-input-container>
+
+                    <!--Boton-->
+                    <input type="submit" id="btn-submit" value="Enviar">
+                </div>
+            </form>
+        </div>
+    </div>   
+</body>
+</html>
+
